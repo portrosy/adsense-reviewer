@@ -177,7 +177,7 @@ export default function App() {
     // 7. Contextual dynamic suggestions
     const suggestions = [];
     if (wordCount < 600) {
-      suggestions.push("Increase length: Google AdSense favors comprehensive articles of at least 600–1000 words to satisfy informational depth.");
+      suggestions.push("Increase length: Google AdSense favors comprehensive articles of at least 600â€“1000 words to satisfy informational depth.");
     }
     if (aiScore > 50) {
       suggestions.push("Reduce AI patterns: Rewrite sections with passive tones or robotic transitions (e.g., 'delve', 'testament', 'in conclusion') into active human voice.");
@@ -517,7 +517,7 @@ Moreover, it is crucial to recognize that modern milestones are occurring faster
                         </span>
                       </div>
                       <div className="mt-1.5 flex items-center justify-between text-[10px] text-slate-500">
-                        <span>{item.niche} • {item.word_count} words</span>
+                        <span>{item.niche} â€¢ {item.word_count} words</span>
                         <span>{item.timestamp}</span>
                       </div>
                     </div>
@@ -1012,7 +1012,7 @@ Moreover, it is crucial to recognize that modern milestones are occurring faster
                       </span>
                       <p className="text-[10px] font-bold uppercase text-purple-400 tracking-wider">Top Leaderboard (Responsive)</p>
                       <div className="mt-1 flex items-center justify-center gap-4 text-[9px] text-slate-500">
-                        <span>Expected CPC: $1.25 – $3.50</span>
+                        <span>Expected CPC: $1.25 â€“ $3.50</span>
                         <span>Width: 100% fluid</span>
                       </div>
                     </div>
