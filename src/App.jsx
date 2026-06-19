@@ -85,10 +85,22 @@ export default function App() {
       if (saved) {
         setHistory(JSON.parse(saved));
       }
+
+
+const savedLogin = localStorage.getItem("adsense_logged_in");
+
+if (savedLogin === "true") {
+  setIsLoggedIn(true);
+}
     } catch (e) {
       console.error("Failed to load history from localStorage", e);
     }
   }, []);
+
+const handleLogout = () => {
+  localStorage.removeItem("adsense_logged_in");
+  setIsLoggedIn(false);
+};
 
   const saveToHistory = (newResult) => {
     const updated = [newResult, ...history].slice(0, 8); // Keep last 8 items
@@ -99,6 +111,25 @@ export default function App() {
       console.error("Failed to save history to localStorage", e);
     }
   };
+  
+  
+  const handleLogin = () => {
+  const validUser = import.meta.env.VITE_APP_USERNAME;
+  const validPass = import.meta.env.VITE_APP_PASSWORD;
+
+  if (username === validUser && password === validPass) {
+    setIsLoggedIn(true);
+    localStorage.setItem("adsense_logged_in", "true");
+  } else {
+    alert("Invalid username or password");
+  }
+};
+  
+
+const [result, setResult] = useState(null);
+const [isLoggedIn, setIsLoggedIn] = useState(false);
+const [username, setUsername] = useState("");
+const [password, setPassword] = useState("");
 
   const runHeuristicAnalysis = (titleText, contentText, nicheText) => {
     const wordCount = contentText.trim().split(/\s+/).filter(Boolean).length;
@@ -291,6 +322,44 @@ Moreover, it is crucial to recognize that modern milestones are occurring faster
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+  
+  
+  
+  if (!isLoggedIn) {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="bg-white p-8 rounded-xl shadow-lg w-96">
+        <h1 className="text-2xl font-bold mb-6 text-center">
+          AdSense Reviewer Login
+        </h1>
+
+        <input
+          type="text"
+          placeholder="Username"
+          className="w-full border p-3 mb-4 rounded"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          className="w-full border p-3 mb-4 rounded"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button
+          onClick={handleLogin}
+          className="w-full bg-blue-600 text-white py-3 rounded"
+        >
+          Login
+        </button>
+      </div>
+    </div>
+  );
+}
+  
 
   return (
     <div className="min-h-screen bg-[#0f172a] text-slate-100 font-sans antialiased">
@@ -309,20 +378,32 @@ Moreover, it is crucial to recognize that modern milestones are occurring faster
               <p className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold">Content Compliance AI</p>
             </div>
           </div>
+		  
+		  
 
           <div className="flex items-center gap-2">
-            <a 
-              href="#policy-guide" 
-              className="hidden sm:flex items-center gap-1.5 rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-1.5 text-xs text-slate-300 hover:bg-slate-800 hover:text-white transition"
-            >
-              <BookOpen className="h-3.5 w-3.5 text-purple-400" />
-              AdSense Policies
-            </a>
-            
-            <span className="rounded-full bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 text-xs text-blue-400 font-medium">
-              Free Trial Tier
-            </span>
-          </div>
+  <a
+    href="#policy-guide"
+    className="hidden sm:flex items-center gap-1.5 rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-1.5 text-xs text-slate-300 hover:bg-slate-800 hover:text-white transition"
+  >
+    <BookOpen className="h-3.5 w-3.5 text-purple-400" />
+    AdSense Policies
+  </a>
+
+  <span className="rounded-full bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 text-xs text-blue-400 font-medium">
+    Free Trial Tier
+  </span>
+
+  <button
+    onClick={handleLogout}
+    className="rounded-lg bg-red-600 hover:bg-red-700 px-3 py-1.5 text-xs font-semibold text-white transition"
+  >
+    Logout
+  </button>
+</div>
+		  
+		  
+		  
         </div>
       </header>
 
