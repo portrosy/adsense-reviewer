@@ -126,7 +126,7 @@ const handleLogout = () => {
 };
   
 
-const [result, setResult] = useState(null);
+
 const [isLoggedIn, setIsLoggedIn] = useState(false);
 const [username, setUsername] = useState("");
 const [password, setPassword] = useState("");
